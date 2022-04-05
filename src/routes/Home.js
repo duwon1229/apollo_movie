@@ -9,6 +9,7 @@ const GET_MOVIEW = gql`
     movies {
       id
       medium_cover_image
+      isLiked @client
     }
   }
 `;
@@ -51,7 +52,9 @@ export default () => {
       {loading && <Loading>Loading...</Loading>}
       {!loading &&
         data.movies &&
-        data.movies.map((m) => <Movie key={m.id} id={m.id} />)}
+        data.movies.map((m) => (
+          <Movie key={m.id} id={m.id} isLiked={m.isLiked} />
+        ))}
     </Cover>
   );
 };
